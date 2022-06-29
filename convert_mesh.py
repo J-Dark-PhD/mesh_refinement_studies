@@ -56,10 +56,10 @@ if __name__ == "__main__":
     for size in max_size_range:
         mesh_folder = "../data/meshes/mesh_study/"
         results_folder = mesh_folder + "mesh_files"
-        med_filename = mesh_folder + "med_files/{}_max_size_{:.1e}.med".format(
+        med_filename = mesh_folder + "med_files/{}_max_size_{:.2e}.med".format(
             component_to_test, size
         )
-        filename_extension = "{}_max_size_{:.1e}".format(component_to_test, size)
+        filename_extension = "{}_max_size_{:.2e}".format(component_to_test, size)
         domains_file, boundary_file = convert_med_to_xdmf(
             med_filename=med_filename,
             filename_extension=filename_extension,

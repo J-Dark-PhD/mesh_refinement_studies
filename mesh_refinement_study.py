@@ -14,14 +14,14 @@ if __name__ == "__main__":
         n += 1
         factor = component_to_test + "_max_size"
         print(
-            "Running case: {}_{:.1e}, iteration {} of {}".format(
+            "Running case: {}_{:.2e}, iteration {} of {}".format(
                 factor, size, n, len(max_size_range)
             )
         )
 
         # define mesh to use
-        domains_file = mesh_folder + "mesh_domains_{}_{:.1e}.xdmf".format(factor, size)
-        boundaries_file = mesh_folder + "mesh_boundaries_{}_{:.1e}.xdmf".format(
+        domains_file = mesh_folder + "mesh_domains_{}_{:.2e}.xdmf".format(factor, size)
+        boundaries_file = mesh_folder + "mesh_boundaries_{}_{:.2e}.xdmf".format(
             factor, size
         )
 
@@ -31,7 +31,7 @@ if __name__ == "__main__":
             temperature_field_3D=temperature_field_3D,
             mesh_domains_filename=domains_file,
             mesh_boundaries_filename=boundaries_file,
-            case="{}_{:.1e}".format(factor, size),
+            case="{}_{:.2e}".format(factor, size),
             exports=True,
         )
 
@@ -41,7 +41,7 @@ if __name__ == "__main__":
             mesh_domains_filename=domains_file,
             mesh_boundaries_filename=boundaries_file,
             temperature_field=T_sl,
-            case="{}_{:.1e}".format(factor, size),
+            case="{}_{:.2e}".format(factor, size),
             exports=True,
         )
 
@@ -55,7 +55,7 @@ if __name__ == "__main__":
             mesh_domains_filename=domains_file,
             mesh_boundaries_filename=boundaries_file,
             temperature_field=mesh_study
-            + "T_files/T_{}_{:.1e}.xdmf".format(factor, size),
+            + "T_files/T_{}_{:.2e}.xdmf".format(factor, size),
             velocity_field=u_full,
-            case="{}_{:.1e}".format(factor, size),
+            case="{}_{:.2e}".format(factor, size),
         )
