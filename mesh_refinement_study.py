@@ -4,9 +4,9 @@ from temp_3D_slicer import slicer
 from solve_navier_stokes import navier_stokes_sim
 from solve_h_transport import h_transport_sim_FESTIM
 
-mesh_study = "../data/meshes/mesh_study/"
-mesh_folder = "../data/meshes/mesh_study/mesh_files/"
-temperature_field_3D = "../data/Results_3D/T.xdmf"
+mesh_folder = "meshes/xdmf_files/"
+temperature_field_3D = "results/3D_results/T.xdmf"
+temperature_fields_2D = "results/temperature_fields/"
 
 if __name__ == "__main__":
     n = 0
@@ -54,8 +54,8 @@ if __name__ == "__main__":
         h_transport_sim_FESTIM(
             mesh_domains_filename=domains_file,
             mesh_boundaries_filename=boundaries_file,
-            temperature_field=mesh_study
-            + "T_files/T_{}_{:.2e}.xdmf".format(factor, size),
+            temperature_field=temperature_fields_2D
+            + "T_{}_{:.2e}.xdmf".format(factor, size),
             velocity_field=u_full,
             case="{}_{:.2e}".format(factor, size),
         )

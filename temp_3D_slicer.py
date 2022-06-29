@@ -35,17 +35,17 @@ def slicer(
     print("Projecting onto 2D mesh")
     T_sl = interpolate(u_slice(), V_2D)
     if exports:
-        XDMFFile(
-            mesh_folder + "mesh_study/T_files/T_{}.xdmf".format(case)
-        ).write_checkpoint(T_sl, "T", 0, XDMFFile.Encoding.HDF5, append=False)
+        XDMFFile("results/temperature_fields/T_{}.xdmf".format(case)).write_checkpoint(
+            T_sl, "T", 0, XDMFFile.Encoding.HDF5, append=False
+        )
     return T_sl
 
 
 if __name__ == "__main__":
-    mesh_folder = "../data/meshes/"
+    mesh_folder = "meshes/standard_case/"
     mesh_domains_filename = mesh_folder + "mesh_domains_2D.xdmf"
     mesh_boundaries_filename = mesh_folder + "mesh_boundaries_2D.xdmf"
-    temperature_field_3D = "../data/Results_3D/T.xdmf"
+    temperature_field_3D = "results/3D_results/T.xdmf"
     T_sl = slicer(
         temperature_field_3D,
         mesh_domains_filename,
@@ -53,6 +53,6 @@ if __name__ == "__main__":
         case="sl",
         exports=False,
     )
-    XDMFFile("../data/Results_3D/T_sl.xdmf").write_checkpoint(
+    XDMFFile("results/3D_results/T_sl.xdmf").write_checkpoint(
         T_sl, "T", 0, XDMFFile.Encoding.HDF5, append=False
     )

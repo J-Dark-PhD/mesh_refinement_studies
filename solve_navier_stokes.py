@@ -141,21 +141,21 @@ def navier_stokes_sim(
     )
 
     if exports:
-        # XDMFFile("Results/u_sub_fine.xdmf").write_checkpoint(
+        # XDMFFile("results/velocity_fields/u_sub_fine.xdmf").write_checkpoint(
         #     u_out, "u", 0, XDMFFile.Encoding.HDF5, append=False
         # )
-        XDMFFile(
-            "../data/meshes/mesh_study/velocity_fields/u_{}.xdmf".format(case)
-        ).write_checkpoint(u_full, "u", 0, XDMFFile.Encoding.HDF5, append=False)
+        XDMFFile("results/velocity_fields/u_{}.xdmf".format(case)).write_checkpoint(
+            u_full, "u", 0, XDMFFile.Encoding.HDF5, append=False
+        )
 
     return u_full
 
 
 if __name__ == "__main__":
-    mesh_folder = "../data/meshes/"
+    mesh_folder = "meshes/"
     mesh_domains_file = mesh_folder + "mesh_domains_2D.xdmf"
     mesh_boundaries_file = mesh_folder + "mesh_boundaries_2D.xdmf"
-    temperature_field = "../data/Results_3D/T_sl.xdmf"
+    temperature_field = "results/3D_results/T_sl.xdmf"
     case = "2D"
 
     # evaluate T
@@ -182,6 +182,6 @@ if __name__ == "__main__":
         exports=False,
     )
 
-    XDMFFile("../data/velocity_fields/u_{}.xdmf".format(case)).write_checkpoint(
+    XDMFFile("results/velocity_fields/u_{}.xdmf".format(case)).write_checkpoint(
         u_full, "u", 0, XDMFFile.Encoding.HDF5, append=False
     )
