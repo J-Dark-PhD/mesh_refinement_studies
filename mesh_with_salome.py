@@ -66,77 +66,77 @@ def generate_mesh_with_salome(
     OY = geompy.MakeVectorDXDYDZ(0, 1, 0)
     OZ = geompy.MakeVectorDXDYDZ(0, 0, 1)
     [Body1, Steel_SOLID] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component1.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component1.step",
         False,
         True,
     )
     [Body1_1, Steel_SOLID_1] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component10.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component10.step",
         False,
         True,
     )
     [Body1_2, Steel_SOLID_2] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component11.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component11.step",
         False,
         True,
     )
     [Body1_3, Steel_SOLID_3] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component12.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component12.step",
         False,
         True,
     )
     [Body1_4, Steel_SOLID_4] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component13.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component13.step",
         False,
         True,
     )
     [Body1_5, Steel_SOLID_5] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component14.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component14.step",
         False,
         True,
     )
     [Body1_6, Steel_SOLID_6] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component15.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component15.step",
         False,
         True,
     )
     [Body1_7, Steel_SOLID_7] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component2.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component2.step",
         False,
         True,
     )
     [Body1_8, Steel_SOLID_8] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component3.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component3.step",
         False,
         True,
     )
     [Body1_9, Steel_SOLID_9] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component4.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component4.step",
         False,
         True,
     )
     [Body1_10, Steel_SOLID_10] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component5.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component5.step",
         False,
         True,
     )
     [Body1_11, Steel_SOLID_11] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component6.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component6.step",
         False,
         True,
     )
     [Body1_12, Steel_SOLID_12] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component7.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component7.step",
         False,
         True,
     )
     [Body1_13, Steel_SOLID_13] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component8.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component8.step",
         False,
         True,
     )
     [Body1_14, Steel_SOLID_14] = geompy.ImportSTEP(
-        "../data/meshes/CAD_files/WCLL ver 4/sym/Component9.step",
+        "meshes/CAD_files/WCLL ver 4/sym/Component9.step",
         False,
         True,
     )
@@ -884,8 +884,6 @@ if __name__ == "__main__":
             size = list[4]
         elif component_to_test == "everything":
             size = list[0]
-        elif component_to_test == "lipb_2.2e-3_everything_else":
-            size = list[1]
         elif component_to_test == "everything_optimised_1" or "everything_optimised_5":
             size = list[-1]
 
@@ -895,7 +893,7 @@ if __name__ == "__main__":
             )
         )
         med_mesh_filename = (
-            "../data/meshes/mesh_study/med_files/{}_max_size_{:.2e}.med".format(
+            "meshes/med_files/{}_max_size_{:.2e}.med".format(
                 component_to_test, size
             )
         )
