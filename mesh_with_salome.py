@@ -372,7 +372,7 @@ def generate_mesh_with_salome(
         WCLL_2D, bz_coolant_interface_3_4, "bz_coolant_interface_3_4"
     )
 
-    ### SMESH component
+    # ### SMESH component
 
     smesh = smeshBuilder.New()
     # smesh.SetEnablePublish( False ) # Set to False to avoid publish in study if not needed or in some particular situations:
@@ -445,6 +445,316 @@ def generate_mesh_with_salome(
     bz_coolant_interface_3_4_1 = Mesh_2D.GroupOnGeom(
         bz_coolant_interface_3_4, "bz_coolant_interface_3_4", SMESH.EDGE
     )
+    NETGEN_2D_Parameters_wcll = smesh.CreateHypothesis(
+        "NETGEN_Parameters_2D", "NETGENEngine"
+    )
+    NETGEN_2D_Parameters_wcll.SetMaxSize(1)
+    NETGEN_2D_Parameters_wcll.SetMinSize(0.01)
+    NETGEN_2D_Parameters_wcll.SetSecondOrder(0)
+    NETGEN_2D_Parameters_wcll.SetOptimize(1)
+    NETGEN_2D_Parameters_wcll.SetFineness(2)
+    NETGEN_2D_Parameters_wcll.SetChordalError(0.5)
+    NETGEN_2D_Parameters_wcll.SetChordalErrorEnabled(1)
+    NETGEN_2D_Parameters_wcll.SetUseSurfaceCurvature(1)
+    NETGEN_2D_Parameters_wcll.SetFuseEdges(1)
+    NETGEN_2D_Parameters_wcll.SetUseDelauney(0)
+    NETGEN_2D_Parameters_wcll.SetQuadAllowed(0)
+    NETGEN_2D_Parameters_wcll.SetWorstElemMeasure(240)
+    NETGEN_2D_Parameters_wcll.SetCheckChartBoundary(16)
+    NETGEN_1D_2D_16 = smesh.CreateHypothesis("NETGEN_2D")
+    NETGEN_1D_2D_1 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=lipb)
+    Sub_mesh_lipb = NETGEN_1D_2D_1.GetSubMesh()
+    NETGEN_2D_Parameters_lipb = NETGEN_1D_2D_1.Parameters()
+    NETGEN_2D_Parameters_lipb.SetMaxSize(lipb_size)
+    NETGEN_2D_Parameters_lipb.SetMinSize(1e-05)
+    NETGEN_2D_Parameters_lipb.SetSecondOrder(0)
+    NETGEN_2D_Parameters_lipb.SetOptimize(1)
+    NETGEN_2D_Parameters_lipb.SetFineness(2)
+    NETGEN_2D_Parameters_lipb.SetChordalError(0.5)
+    NETGEN_2D_Parameters_lipb.SetChordalErrorEnabled(1)
+    NETGEN_2D_Parameters_lipb.SetUseSurfaceCurvature(1)
+    NETGEN_2D_Parameters_lipb.SetFuseEdges(1)
+    NETGEN_2D_Parameters_lipb.SetUseDelauney(0)
+    NETGEN_2D_Parameters_lipb.SetQuadAllowed(0)
+    NETGEN_2D_Parameters_lipb.SetWorstElemMeasure(240)
+    NETGEN_2D_Parameters_lipb.SetCheckChartBoundary(16)
+    NETGEN_1D_2D_2 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=structure)
+    Sub_mesh_structure = NETGEN_1D_2D_2.GetSubMesh()
+    NETGEN_2D_Parameters_structure = NETGEN_1D_2D_2.Parameters()
+    NETGEN_2D_Parameters_structure.SetMaxSize(structure_size)
+    NETGEN_2D_Parameters_structure.SetMinSize(1e-05)
+    NETGEN_2D_Parameters_structure.SetSecondOrder(0)
+    NETGEN_2D_Parameters_structure.SetOptimize(1)
+    NETGEN_2D_Parameters_structure.SetFineness(2)
+    NETGEN_2D_Parameters_structure.SetChordalError(0.5)
+    NETGEN_2D_Parameters_structure.SetChordalErrorEnabled(1)
+    NETGEN_2D_Parameters_structure.SetUseSurfaceCurvature(1)
+    NETGEN_2D_Parameters_structure.SetFuseEdges(1)
+    NETGEN_2D_Parameters_structure.SetUseDelauney(0)
+    NETGEN_2D_Parameters_structure.SetQuadAllowed(0)
+    NETGEN_2D_Parameters_structure.SetWorstElemMeasure(240)
+    NETGEN_2D_Parameters_structure.SetCheckChartBoundary(16)
+    isDone = Mesh_2D.SetMeshOrder([[Sub_mesh_lipb, Sub_mesh_structure]])
+    NETGEN_1D_2D_3 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=baffle_plate)
+    Sub_mesh_baffle = NETGEN_1D_2D_3.GetSubMesh()
+    NETGEN_2D_Parameters_baffle = NETGEN_1D_2D_3.Parameters()
+    NETGEN_2D_Parameters_baffle.SetMaxSize(baffle_plate_size)
+    NETGEN_2D_Parameters_baffle.SetMinSize(1e-05)
+    NETGEN_2D_Parameters_baffle.SetSecondOrder(0)
+    NETGEN_2D_Parameters_baffle.SetOptimize(1)
+    NETGEN_2D_Parameters_baffle.SetFineness(2)
+    NETGEN_2D_Parameters_baffle.SetChordalError(0.5)
+    NETGEN_2D_Parameters_baffle.SetChordalErrorEnabled(1)
+    NETGEN_2D_Parameters_baffle.SetUseSurfaceCurvature(1)
+    NETGEN_2D_Parameters_baffle.SetFuseEdges(1)
+    NETGEN_2D_Parameters_baffle.SetUseDelauney(0)
+    NETGEN_2D_Parameters_baffle.SetQuadAllowed(0)
+    NETGEN_2D_Parameters_baffle.SetWorstElemMeasure(240)
+    NETGEN_2D_Parameters_baffle.SetCheckChartBoundary(16)
+    isDone = Mesh_2D.SetMeshOrder(
+        [[Sub_mesh_lipb, Sub_mesh_structure, Sub_mesh_baffle]]
+    )
+    NETGEN_1D_2D_4 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=tungsten)
+    Sub_mesh_tungsten = NETGEN_1D_2D_4.GetSubMesh()
+    NETGEN_2D_Parameters_tungsten = NETGEN_1D_2D_4.Parameters()
+    NETGEN_2D_Parameters_tungsten.SetMaxSize(tungsten_size)
+    NETGEN_2D_Parameters_tungsten.SetMinSize(1e-05)
+    NETGEN_2D_Parameters_tungsten.SetSecondOrder(0)
+    NETGEN_2D_Parameters_tungsten.SetOptimize(1)
+    NETGEN_2D_Parameters_tungsten.SetFineness(2)
+    NETGEN_2D_Parameters_tungsten.SetChordalError(0.5)
+    NETGEN_2D_Parameters_tungsten.SetChordalErrorEnabled(1)
+    NETGEN_2D_Parameters_tungsten.SetUseSurfaceCurvature(1)
+    NETGEN_2D_Parameters_tungsten.SetFuseEdges(1)
+    NETGEN_2D_Parameters_tungsten.SetUseDelauney(0)
+    NETGEN_2D_Parameters_tungsten.SetQuadAllowed(0)
+    NETGEN_2D_Parameters_tungsten.SetWorstElemMeasure(240)
+    NETGEN_2D_Parameters_tungsten.SetCheckChartBoundary(16)
+    isDone = Mesh_2D.SetMeshOrder(
+        [[Sub_mesh_lipb, Sub_mesh_structure, Sub_mesh_baffle, Sub_mesh_tungsten]]
+    )
+    NETGEN_1D_2D_5 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_1_1)
+    Sub_mesh_pipe_1_1 = NETGEN_1D_2D_5.GetSubMesh()
+    NETGEN_2D_Parameters_pipes = NETGEN_1D_2D_5.Parameters()
+    NETGEN_2D_Parameters_pipes.SetMaxSize(bz_pipe_1_1_size)
+    NETGEN_2D_Parameters_pipes.SetMinSize(1e-05)
+    NETGEN_2D_Parameters_pipes.SetSecondOrder(0)
+    NETGEN_2D_Parameters_pipes.SetOptimize(1)
+    NETGEN_2D_Parameters_pipes.SetFineness(2)
+    NETGEN_2D_Parameters_pipes.SetChordalError(0.5)
+    NETGEN_2D_Parameters_pipes.SetChordalErrorEnabled(1)
+    NETGEN_2D_Parameters_pipes.SetUseSurfaceCurvature(1)
+    NETGEN_2D_Parameters_pipes.SetFuseEdges(1)
+    NETGEN_2D_Parameters_pipes.SetUseDelauney(0)
+    NETGEN_2D_Parameters_pipes.SetQuadAllowed(0)
+    NETGEN_2D_Parameters_pipes.SetWorstElemMeasure(240)
+    NETGEN_2D_Parameters_pipes.SetCheckChartBoundary(16)
+    isDone = Mesh_2D.SetMeshOrder(
+        [
+            [
+                Sub_mesh_lipb,
+                Sub_mesh_structure,
+                Sub_mesh_baffle,
+                Sub_mesh_tungsten,
+                Sub_mesh_pipe_1_1,
+            ]
+        ]
+    )
+    NETGEN_1D_2D_6 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_1_2)
+    Sub_mesh_pipe_1_2 = NETGEN_1D_2D_6.GetSubMesh()
+    status = Mesh_2D.AddHypothesis(NETGEN_2D_Parameters_pipes, bz_pipe_1_2)
+    isDone = Mesh_2D.SetMeshOrder(
+        [
+            [
+                Sub_mesh_lipb,
+                Sub_mesh_structure,
+                Sub_mesh_baffle,
+                Sub_mesh_tungsten,
+                Sub_mesh_pipe_1_1,
+                Sub_mesh_pipe_1_2,
+            ]
+        ]
+    )
+    NETGEN_1D_2D_7 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_1_3)
+    Sub_mesh_pipe_1_3 = NETGEN_1D_2D_7.GetSubMesh()
+    status = Mesh_2D.AddHypothesis(NETGEN_2D_Parameters_pipes, bz_pipe_1_3)
+    isDone = Mesh_2D.SetMeshOrder(
+        [
+            [
+                Sub_mesh_lipb,
+                Sub_mesh_structure,
+                Sub_mesh_baffle,
+                Sub_mesh_tungsten,
+                Sub_mesh_pipe_1_1,
+                Sub_mesh_pipe_1_2,
+                Sub_mesh_pipe_1_3,
+            ]
+        ]
+    )
+    NETGEN_1D_2D_8 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_2_1)
+    Sub_mesh_pipe_2_1 = NETGEN_1D_2D_8.GetSubMesh()
+    status = Mesh_2D.AddHypothesis(NETGEN_2D_Parameters_pipes, bz_pipe_2_1)
+    isDone = Mesh_2D.SetMeshOrder(
+        [
+            [
+                Sub_mesh_lipb,
+                Sub_mesh_structure,
+                Sub_mesh_baffle,
+                Sub_mesh_tungsten,
+                Sub_mesh_pipe_1_1,
+                Sub_mesh_pipe_1_2,
+                Sub_mesh_pipe_1_3,
+                Sub_mesh_pipe_2_1,
+            ]
+        ]
+    )
+    NETGEN_1D_2D_9 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_2_2)
+    Sub_mesh_pipe_2_2 = NETGEN_1D_2D_9.GetSubMesh()
+    status = Mesh_2D.AddHypothesis(NETGEN_2D_Parameters_pipes, bz_pipe_2_2)
+    isDone = Mesh_2D.SetMeshOrder(
+        [
+            [
+                Sub_mesh_lipb,
+                Sub_mesh_structure,
+                Sub_mesh_baffle,
+                Sub_mesh_tungsten,
+                Sub_mesh_pipe_1_1,
+                Sub_mesh_pipe_1_2,
+                Sub_mesh_pipe_1_3,
+                Sub_mesh_pipe_2_1,
+                Sub_mesh_pipe_2_2,
+            ]
+        ]
+    )
+    NETGEN_1D_2D_10 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_2_3)
+    Sub_mesh_pipe_2_3 = NETGEN_1D_2D_10.GetSubMesh()
+    status = Mesh_2D.AddHypothesis(NETGEN_2D_Parameters_pipes, bz_pipe_2_3)
+    isDone = Mesh_2D.SetMeshOrder(
+        [
+            [
+                Sub_mesh_lipb,
+                Sub_mesh_structure,
+                Sub_mesh_baffle,
+                Sub_mesh_tungsten,
+                Sub_mesh_pipe_1_1,
+                Sub_mesh_pipe_1_2,
+                Sub_mesh_pipe_1_3,
+                Sub_mesh_pipe_2_1,
+                Sub_mesh_pipe_2_2,
+                Sub_mesh_pipe_2_3,
+            ]
+        ]
+    )
+    NETGEN_1D_2D_11 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_2_4)
+    Sub_mesh_pipe_2_4 = NETGEN_1D_2D_11.GetSubMesh()
+    status = Mesh_2D.AddHypothesis(NETGEN_2D_Parameters_pipes, bz_pipe_2_4)
+    isDone = Mesh_2D.SetMeshOrder(
+        [
+            [
+                Sub_mesh_lipb,
+                Sub_mesh_structure,
+                Sub_mesh_baffle,
+                Sub_mesh_tungsten,
+                Sub_mesh_pipe_1_1,
+                Sub_mesh_pipe_1_2,
+                Sub_mesh_pipe_1_3,
+                Sub_mesh_pipe_2_1,
+                Sub_mesh_pipe_2_2,
+                Sub_mesh_pipe_2_3,
+                Sub_mesh_pipe_2_4,
+            ]
+        ]
+    )
+    NETGEN_1D_2D_12 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_3_1)
+    Sub_mesh_pipe_3_1 = NETGEN_1D_2D_12.GetSubMesh()
+    status = Mesh_2D.AddHypothesis(NETGEN_2D_Parameters_pipes, bz_pipe_3_1)
+    isDone = Mesh_2D.SetMeshOrder(
+        [
+            [
+                Sub_mesh_lipb,
+                Sub_mesh_structure,
+                Sub_mesh_baffle,
+                Sub_mesh_tungsten,
+                Sub_mesh_pipe_1_1,
+                Sub_mesh_pipe_1_2,
+                Sub_mesh_pipe_1_3,
+                Sub_mesh_pipe_2_1,
+                Sub_mesh_pipe_2_2,
+                Sub_mesh_pipe_2_3,
+                Sub_mesh_pipe_2_4,
+                Sub_mesh_pipe_3_1,
+            ]
+        ]
+    )
+    NETGEN_1D_2D_13 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_3_2)
+    Sub_mesh_pipe_3_2 = NETGEN_1D_2D_13.GetSubMesh()
+    status = Mesh_2D.AddHypothesis(NETGEN_2D_Parameters_pipes, bz_pipe_3_2)
+    isDone = Mesh_2D.SetMeshOrder(
+        [
+            [
+                Sub_mesh_lipb,
+                Sub_mesh_structure,
+                Sub_mesh_baffle,
+                Sub_mesh_tungsten,
+                Sub_mesh_pipe_1_1,
+                Sub_mesh_pipe_1_2,
+                Sub_mesh_pipe_1_3,
+                Sub_mesh_pipe_2_1,
+                Sub_mesh_pipe_2_2,
+                Sub_mesh_pipe_2_3,
+                Sub_mesh_pipe_2_4,
+                Sub_mesh_pipe_3_1,
+                Sub_mesh_pipe_3_2,
+            ]
+        ]
+    )
+    NETGEN_1D_2D_14 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_3_3)
+    Sub_mesh_pipe_3_3 = NETGEN_1D_2D_14.GetSubMesh()
+    status = Mesh_2D.AddHypothesis(NETGEN_2D_Parameters_pipes, bz_pipe_3_3)
+    isDone = Mesh_2D.SetMeshOrder(
+        [
+            [
+                Sub_mesh_lipb,
+                Sub_mesh_structure,
+                Sub_mesh_baffle,
+                Sub_mesh_tungsten,
+                Sub_mesh_pipe_1_1,
+                Sub_mesh_pipe_1_2,
+                Sub_mesh_pipe_1_3,
+                Sub_mesh_pipe_2_1,
+                Sub_mesh_pipe_2_2,
+                Sub_mesh_pipe_2_3,
+                Sub_mesh_pipe_2_4,
+                Sub_mesh_pipe_3_1,
+                Sub_mesh_pipe_3_2,
+                Sub_mesh_pipe_3_3,
+            ]
+        ]
+    )
+    NETGEN_1D_2D_15 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_3_4)
+    Sub_mesh_pipe_3_4 = NETGEN_1D_2D_15.GetSubMesh()
+    status = Mesh_2D.AddHypothesis(NETGEN_2D_Parameters_pipes, bz_pipe_3_4)
+    isDone = Mesh_2D.SetMeshOrder(
+        [
+            [
+                Sub_mesh_lipb,
+                Sub_mesh_structure,
+                Sub_mesh_baffle,
+                Sub_mesh_tungsten,
+                Sub_mesh_pipe_1_1,
+                Sub_mesh_pipe_1_2,
+                Sub_mesh_pipe_1_3,
+                Sub_mesh_pipe_2_1,
+                Sub_mesh_pipe_2_2,
+                Sub_mesh_pipe_2_3,
+                Sub_mesh_pipe_2_4,
+                Sub_mesh_pipe_3_1,
+                Sub_mesh_pipe_3_2,
+                Sub_mesh_pipe_3_3,
+                Sub_mesh_pipe_3_4,
+            ]
+        ]
+    )
     isDone = Mesh_2D.Compute()
     [
         lipb_1,
@@ -481,74 +791,64 @@ def generate_mesh_with_salome(
         bz_coolant_interface_3_3_1,
         bz_coolant_interface_3_4_1,
     ] = Mesh_2D.GetGroups()
-    NETGEN_2D_Parameters_1 = NETGEN_1D_2D.Parameters()
-    NETGEN_2D_Parameters_1.SetMaxSize(0.002)
-    NETGEN_2D_Parameters_1.SetMinSize(0.001)
-    NETGEN_2D_Parameters_1.SetSecondOrder(0)
-    NETGEN_2D_Parameters_1.SetOptimize(1)
-    NETGEN_2D_Parameters_1.SetFineness(2)
-    NETGEN_2D_Parameters_1.SetChordalError(-1)
-    NETGEN_2D_Parameters_1.SetChordalErrorEnabled(0)
-    NETGEN_2D_Parameters_1.SetUseSurfaceCurvature(1)
-    NETGEN_2D_Parameters_1.SetFuseEdges(1)
-    NETGEN_2D_Parameters_1.SetUseDelauney(0)
-    NETGEN_2D_Parameters_1.SetQuadAllowed(0)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(lipb, lipb_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(structure, structure_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(baffle_plate, baffle_plate_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(tungsten, tungsten_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(bz_pipe_1_1, bz_pipe_1_1_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(bz_pipe_1_2, bz_pipe_1_2_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(bz_pipe_1_3, bz_pipe_1_3_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(bz_pipe_2_1, bz_pipe_2_1_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(bz_pipe_2_2, bz_pipe_2_2_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(bz_pipe_2_3, bz_pipe_2_3_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(bz_pipe_2_4, bz_pipe_2_4_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(bz_pipe_3_1, bz_pipe_3_1_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(bz_pipe_3_2, bz_pipe_3_2_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(bz_pipe_3_3, bz_pipe_3_3_size)
-    NETGEN_2D_Parameters_1.SetLocalSizeOnShape(bz_pipe_3_4, bz_pipe_3_4_size)
-    NETGEN_2D_Parameters_1.SetWorstElemMeasure(35)
-    NETGEN_2D_Parameters_1.SetCheckChartBoundary(64)
-    isDone = Mesh_2D.Compute()
 
     ## Set names of Mesh objects
-    smesh.SetName(bz_pipe_2_3_1, "bz_pipe_2_3")
-    smesh.SetName(bz_pipe_2_4_1, "bz_pipe_2_4")
-    smesh.SetName(bz_pipe_3_1_1, "bz_pipe_3_1")
-    smesh.SetName(bz_pipe_3_2_1, "bz_pipe_3_2")
-    smesh.SetName(bz_pipe_3_3_1, "bz_pipe_3_3")
-    smesh.SetName(bz_pipe_3_4_1, "bz_pipe_3_4")
     smesh.SetName(NETGEN_1D_2D.GetAlgorithm(), "NETGEN 1D-2D")
-    smesh.SetName(bz_pipe_2_2_1, "bz_pipe_2_2")
     smesh.SetName(bz_pipe_2_1_1, "bz_pipe_2_1")
-    smesh.SetName(lipb_1, "lipb")
+    smesh.SetName(bz_pipe_2_2_1, "bz_pipe_2_2")
+    smesh.SetName(NETGEN_2D_Parameters_structure, "NETGEN 2D Parameters_structure")
+    smesh.SetName(NETGEN_2D_Parameters_baffle, "NETGEN 2D Parameters_baffle")
+    smesh.SetName(Sub_mesh_pipe_2_2, "Sub-mesh_pipe_2_2")
+    smesh.SetName(Sub_mesh_pipe_2_1, "Sub-mesh_pipe_2_1")
+    smesh.SetName(NETGEN_2D_Parameters_lipb, "NETGEN 2D Parameters_lipb")
+    smesh.SetName(NETGEN_2D_Parameters_wcll, "NETGEN 2D Parameters_wcll")
+    smesh.SetName(Sub_mesh_pipe_1_1, "Sub-mesh_pipe_1_1")
+    smesh.SetName(NETGEN_2D_Parameters_tungsten, "NETGEN 2D Parameters_tungsten")
     smesh.SetName(bz_coolant_interface_3_4_1, "bz_coolant_interface_3_4")
-    smesh.SetName(baffle_plate_1, "baffle_plate")
+    smesh.SetName(lipb_1, "lipb")
+    smesh.SetName(NETGEN_2D_Parameters_pipes, "NETGEN 2D Parameters_pipes")
+    smesh.SetName(Sub_mesh_tungsten, "Sub-mesh_tungsten")
     smesh.SetName(structure_1, "structure")
-    smesh.SetName(bz_pipe_1_1_1, "bz_pipe_1_1")
+    smesh.SetName(Sub_mesh_pipe_1_3, "Sub-mesh_pipe_1_3")
+    smesh.SetName(baffle_plate_1, "baffle_plate")
+    smesh.SetName(Sub_mesh_pipe_1_2, "Sub-mesh_pipe_1_2")
     smesh.SetName(tungsten_1, "tungsten")
-    smesh.SetName(bz_coolant_interface_1_1_1, "bz_coolant_interface_1_1")
-    smesh.SetName(bz_pipe_1_3_1, "bz_pipe_1_3")
-    smesh.SetName(bz_coolant_interface_1_2_1, "bz_coolant_interface_1_2")
+    smesh.SetName(Sub_mesh_lipb, "Sub-mesh_lipb")
+    smesh.SetName(bz_pipe_1_1_1, "bz_pipe_1_1")
     smesh.SetName(bz_pipe_1_2_1, "bz_pipe_1_2")
-    smesh.SetName(bz_coolant_interface_2_1_1, "bz_coolant_interface_2_1")
+    smesh.SetName(Sub_mesh_baffle, "Sub-mesh_baffle")
+    smesh.SetName(bz_pipe_1_3_1, "bz_pipe_1_3")
+    smesh.SetName(Sub_mesh_structure, "Sub-mesh_structure")
     smesh.SetName(bz_coolant_interface_1_3_1, "bz_coolant_interface_1_3")
-    smesh.SetName(bz_coolant_interface_2_3_1, "bz_coolant_interface_2_3")
+    smesh.SetName(bz_coolant_interface_2_1_1, "bz_coolant_interface_2_1")
     smesh.SetName(bz_coolant_interface_2_2_1, "bz_coolant_interface_2_2")
-    smesh.SetName(bz_coolant_interface_3_1_1, "bz_coolant_interface_3_1")
+    smesh.SetName(bz_coolant_interface_2_3_1, "bz_coolant_interface_2_3")
     smesh.SetName(bz_coolant_interface_2_4_1, "bz_coolant_interface_2_4")
-    smesh.SetName(Mesh_2D.GetMesh(), "Mesh_2D")
-    smesh.SetName(bz_coolant_interface_3_3_1, "bz_coolant_interface_3_3")
+    smesh.SetName(bz_coolant_interface_3_1_1, "bz_coolant_interface_3_1")
     smesh.SetName(bz_coolant_interface_3_2_1, "bz_coolant_interface_3_2")
+    smesh.SetName(bz_coolant_interface_3_3_1, "bz_coolant_interface_3_3")
+    smesh.SetName(Mesh_2D.GetMesh(), "Mesh_2D")
+    smesh.SetName(bz_pipe_2_4_1, "bz_pipe_2_4")
+    smesh.SetName(bz_pipe_2_3_1, "bz_pipe_2_3")
+    smesh.SetName(bz_pipe_3_2_1, "bz_pipe_3_2")
+    smesh.SetName(bz_pipe_3_1_1, "bz_pipe_3_1")
+    smesh.SetName(bz_pipe_3_4_1, "bz_pipe_3_4")
+    smesh.SetName(bz_pipe_3_3_1, "bz_pipe_3_3")
+    smesh.SetName(bz_coolant_interface_1_2_1, "bz_coolant_interface_1_2")
+    smesh.SetName(bz_coolant_interface_1_1_1, "bz_coolant_interface_1_1")
     smesh.SetName(inlet_1, "inlet")
-    smesh.SetName(outlet_1, "outlet")
     smesh.SetName(plasma_facing_wall_1, "plasma_facing_wall")
-    smesh.SetName(fw_coolant_interface_1_1_1, "fw_coolant_interface_1_1")
+    smesh.SetName(outlet_1, "outlet")
     smesh.SetName(fw_coolant_interface_1_2_1, "fw_coolant_interface_1_2")
-    smesh.SetName(fw_coolant_interface_1_3_1, "fw_coolant_interface_1_3")
+    smesh.SetName(Sub_mesh_pipe_3_3, "Sub-mesh_pipe_3_3")
+    smesh.SetName(fw_coolant_interface_1_1_1, "fw_coolant_interface_1_1")
+    smesh.SetName(Sub_mesh_pipe_3_4, "Sub-mesh_pipe_3_4")
     smesh.SetName(fw_coolant_interface_1_4_1, "fw_coolant_interface_1_4")
-    smesh.SetName(NETGEN_2D_Parameters_1, "NETGEN 2D Parameters_1")
+    smesh.SetName(fw_coolant_interface_1_3_1, "fw_coolant_interface_1_3")
+    smesh.SetName(Sub_mesh_pipe_2_3, "Sub-mesh_pipe_2_3")
+    smesh.SetName(Sub_mesh_pipe_2_4, "Sub-mesh_pipe_2_4")
+    smesh.SetName(Sub_mesh_pipe_3_1, "Sub-mesh_pipe_3_1")
+    smesh.SetName(Sub_mesh_pipe_3_2, "Sub-mesh_pipe_3_2")
 
     try:
         Mesh_2D.ExportMED(
@@ -590,12 +890,12 @@ if __name__ == "__main__":
             size = list[-1]
 
         print(
-            "meshing for size = {:.1e}, iteration {} of {}".format(
+            "meshing for size = {:.2e}, iteration {} of {}".format(
                 size, n, len(max_size_range)
             )
         )
         med_mesh_filename = (
-            "../data/meshes/mesh_study/med_files/{}_max_size_{:.1e}.med".format(
+            "../data/meshes/mesh_study/med_files/{}_max_size_{:.2e}.med".format(
                 component_to_test, size
             )
         )
@@ -614,7 +914,6 @@ if __name__ == "__main__":
         bz_pipe_3_2_size = list[12]
         bz_pipe_3_3_size = list[13]
         bz_pipe_3_4_size = list[14]
-
         generate_mesh_with_salome(
             med_mesh_filename=med_mesh_filename,
             lipb_size=lipb_size,
