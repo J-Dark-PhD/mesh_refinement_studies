@@ -4,7 +4,7 @@
 
 To create a mesh, run:
 ```
-C:\SALOME-9.6.0\run_salome.bat -t mesh_with_salome.py
+C:\SALOME-9.8.0\run_salome.bat -t mesh_with_salome.py
 ```
 You may need to replace the path to `run_salome.bat`.
 
