@@ -1,4 +1,4 @@
-# Mesh refinement studies
+# Mesh Refinement Studies
 
 ## 1. Mesh
 
