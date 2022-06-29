@@ -109,3 +109,4 @@ venv.bak/
 *.med
 *.h5
 *.xdmf
+*.hdf
