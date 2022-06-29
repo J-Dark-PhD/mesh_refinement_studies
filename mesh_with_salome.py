@@ -32,17 +32,7 @@ def generate_mesh_with_salome(
         structure_size (float, optional): the maximum mesh cell size in the structure
         baffle_plate_size (float, optional): the maximum mesh cell size in the baffle_plate
         tungsten_size (float, optional): the maximum mesh cell size in the tungsten
-        bz_pipe_1_1_size (float, optional): the maximum mesh cell size in the bz_pipe_1_1
-        bz_pipe_1_2_size (float, optional): the maximum mesh cell size in the bz_pipe_1_2
-        bz_pipe_1_3_size (float, optional): the maximum mesh cell size in the bz_pipe_1_3
-        bz_pipe_2_1_size (float, optional): the maximum mesh cell size in the bz_pipe_2_1
-        bz_pipe_2_2_size (float, optional): the maximum mesh cell size in the bz_pipe_2_2
-        bz_pipe_2_3_size (float, optional): the maximum mesh cell size in the bz_pipe_2_3
-        bz_pipe_2_4_size (float, optional): the maximum mesh cell size in the bz_pipe_2_4
-        bz_pipe_3_1_size (float, optional): the maximum mesh cell size in the bz_pipe_3_1
-        bz_pipe_3_2_size (float, optional): the maximum mesh cell size in the bz_pipe_3_2
-        bz_pipe_3_3_size (float, optional): the maximum mesh cell size in the bz_pipe_3_3
-        bz_pipe_3_4_size (float, optional): the maximum mesh cell size in the bz_pipe_3_4
+        bz_pipes_size (float, optional): the maximum mesh cell size in the bz pipes
 
     Returns:
         [.med file]: the mesh file in .med format
@@ -858,7 +848,6 @@ def generate_mesh_with_salome(
 
 
 if __name__ == "__main__":
-    # generate_mesh_with_salome(med_mesh_filename="Mesh_2D.med")
     n = 0
     for list in test_list:
         n += 1
