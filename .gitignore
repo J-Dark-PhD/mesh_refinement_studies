@@ -106,3 +106,6 @@ venv.bak/
 # files to igore
 *.svg
 *.step
+*.med
+*.h5
+*.xdmf
