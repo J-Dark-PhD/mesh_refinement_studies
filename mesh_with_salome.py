@@ -23,17 +23,7 @@ def generate_mesh_with_salome(
     structure_size=0.01,
     baffle_plate_size=0.01,
     tungsten_size=0.01,
-    bz_pipe_1_1_size=0.01,
-    bz_pipe_1_2_size=0.01,
-    bz_pipe_1_3_size=0.01,
-    bz_pipe_2_1_size=0.01,
-    bz_pipe_2_2_size=0.01,
-    bz_pipe_2_3_size=0.01,
-    bz_pipe_2_4_size=0.01,
-    bz_pipe_3_1_size=0.01,
-    bz_pipe_3_2_size=0.01,
-    bz_pipe_3_3_size=0.01,
-    bz_pipe_3_4_size=0.01,
+    bz_pipes_size=0.01,
 ):
     """creates a mesh using salome 9.8.0 in the WCLL model
 
@@ -536,7 +526,7 @@ def generate_mesh_with_salome(
     NETGEN_1D_2D_5 = Mesh_2D.Triangle(algo=smeshBuilder.NETGEN_1D2D, geom=bz_pipe_1_1)
     Sub_mesh_pipe_1_1 = NETGEN_1D_2D_5.GetSubMesh()
     NETGEN_2D_Parameters_pipes = NETGEN_1D_2D_5.Parameters()
-    NETGEN_2D_Parameters_pipes.SetMaxSize(bz_pipe_1_1_size)
+    NETGEN_2D_Parameters_pipes.SetMaxSize(bz_pipes_size)
     NETGEN_2D_Parameters_pipes.SetMinSize(1e-05)
     NETGEN_2D_Parameters_pipes.SetSecondOrder(0)
     NETGEN_2D_Parameters_pipes.SetOptimize(1)
@@ -892,42 +882,21 @@ if __name__ == "__main__":
                 size, n, len(max_size_range)
             )
         )
-        med_mesh_filename = (
-            "meshes/med_files/{}_max_size_{:.2e}.med".format(
-                component_to_test, size
-            )
+        med_mesh_filename = "meshes/med_files/{}_max_size_{:.2e}.med".format(
+            component_to_test, size
         )
         lipb_size = list[0]
         structure_size = list[1]
         baffle_plate_size = list[2]
         tungsten_size = list[3]
-        bz_pipe_1_1_size = list[4]
-        bz_pipe_1_2_size = list[5]
-        bz_pipe_1_3_size = list[6]
-        bz_pipe_2_1_size = list[7]
-        bz_pipe_2_2_size = list[8]
-        bz_pipe_2_3_size = list[9]
-        bz_pipe_2_4_size = list[10]
-        bz_pipe_3_1_size = list[11]
-        bz_pipe_3_2_size = list[12]
-        bz_pipe_3_3_size = list[13]
-        bz_pipe_3_4_size = list[14]
+        bz_pipes_size = list[4]
+
         generate_mesh_with_salome(
             med_mesh_filename=med_mesh_filename,
             lipb_size=lipb_size,
             structure_size=structure_size,
             baffle_plate_size=baffle_plate_size,
             tungsten_size=tungsten_size,
-            bz_pipe_1_1_size=bz_pipe_1_1_size,
-            bz_pipe_1_2_size=bz_pipe_1_2_size,
-            bz_pipe_1_3_size=bz_pipe_1_3_size,
-            bz_pipe_2_1_size=bz_pipe_2_1_size,
-            bz_pipe_2_2_size=bz_pipe_2_2_size,
-            bz_pipe_2_3_size=bz_pipe_2_3_size,
-            bz_pipe_2_4_size=bz_pipe_2_4_size,
-            bz_pipe_3_1_size=bz_pipe_3_1_size,
-            bz_pipe_3_2_size=bz_pipe_3_2_size,
-            bz_pipe_3_3_size=bz_pipe_3_3_size,
-            bz_pipe_3_4_size=bz_pipe_3_4_size,
+            bz_pipes_size=bz_pipes_size,
         )
         print("done")
