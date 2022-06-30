@@ -29,7 +29,7 @@ def h_transport_sim_FESTIM(
     # my_model.T.create_functions(my_model.mesh)
 
     # detail results filename and location
-    results_folder = "../data/meshes/mesh_study/Results/{}/".format(case)
+    results_folder = "results/h_transport_results/{}/".format(case)
     for export in my_model.exports.exports:
         if isinstance(export, F.DerivedQuantities):
             export.filename = results_folder + "derived_quantities.csv"
@@ -67,10 +67,10 @@ def h_transport_sim_FESTIM(
 
 
 if __name__ == "__main__":
-    temperature_field_file = "../data/Results_3D/T_sl.xdmf"
-    velocity_field = "../data/velocity_fields/u_2D.xdmf"
+    temperature_field_file = "results/standard_case/T_sl.xdmf"
+    velocity_field = "results/standard_case/u_2D.xdmf"
     # project velocity field
-    mesh_folder = "../data/meshes/"
+    mesh_folder = "meshes/standard_case/"
     mesh_domains_file = mesh_folder + "mesh_domains_2D.xdmf"
     mesh_boundaries_file = mesh_folder + "mesh_boundaries_2D.xdmf"
 

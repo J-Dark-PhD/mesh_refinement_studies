@@ -5,7 +5,7 @@ import FESTIM as F
 def slicer(
     temperature_field_3D, mesh_domains_filename, mesh_boundaries_filename, case, exports
 ):
-    mesh_folder = "../data/meshes/"
+    mesh_folder = "meshes/standard_case/"
     mesh_3D = F.MeshFromXDMF(
         volume_file=mesh_folder + "mesh_domains_3D.xdmf",
         boundary_file=mesh_folder + "mesh_boundaries_3D.xdmf",
@@ -53,6 +53,6 @@ if __name__ == "__main__":
         case="sl",
         exports=False,
     )
-    XDMFFile("results/3D_results/T_sl.xdmf").write_checkpoint(
+    XDMFFile("results/standard_case/T_sl.xdmf").write_checkpoint(
         T_sl, "T", 0, XDMFFile.Encoding.HDF5, append=False
     )

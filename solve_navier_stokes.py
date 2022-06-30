@@ -152,10 +152,10 @@ def navier_stokes_sim(
 
 
 if __name__ == "__main__":
-    mesh_folder = "meshes/"
+    mesh_folder = "meshes/standard_case/"
     mesh_domains_file = mesh_folder + "mesh_domains_2D.xdmf"
     mesh_boundaries_file = mesh_folder + "mesh_boundaries_2D.xdmf"
-    temperature_field = "results/3D_results/T_sl.xdmf"
+    temperature_field = "results/standard_case/T_sl.xdmf"
     case = "2D"
 
     # evaluate T
@@ -182,6 +182,6 @@ if __name__ == "__main__":
         exports=False,
     )
 
-    XDMFFile("results/velocity_fields/u_{}.xdmf".format(case)).write_checkpoint(
+    XDMFFile("results/standard_case/u_{}.xdmf".format(case)).write_checkpoint(
         u_full, "u", 0, XDMFFile.Encoding.HDF5, append=False
     )
