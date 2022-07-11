@@ -849,6 +849,9 @@ def generate_mesh_with_salome(
 
 if __name__ == "__main__":
     n = 0
+
+    test_list = [[0.005, 0.005, 0.005, 0.005, 0.005]]
+    component_to_test = "everything"
     for list in test_list:
         n += 1
         if component_to_test == "lipb":
@@ -867,8 +870,8 @@ if __name__ == "__main__":
             size = list[-1]
 
         print(
-            "meshing for size = {:.2e}, iteration {} of {}".format(
-                size, n, len(max_size_range)
+            "meshing {} for size = {:.2e}, iteration {} of {}".format(
+                component_to_test, size, n, len(max_size_range)
             )
         )
         med_mesh_filename = "meshes/med_files/{}_max_size_{:.2e}.med".format(
