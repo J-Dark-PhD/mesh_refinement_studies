@@ -3,17 +3,6 @@ import numpy as np
 max_size_range = []
 test_list = []
 
-
-# max_size_range = []
-# inital_value = 0.005
-# max_size_range.append(inital_value)
-# # for i in range(1, 35):
-# for i in range(1, 28):
-#     max_size_range.append(inital_value * 0.9**i)
-
-# print("{:.2e}".format(max_size_range[-2]))
-# quit()
-
 component_to_test = "everything"
 
 # optimised values 0.5%
@@ -59,7 +48,6 @@ if component_to_test == "everything":
     )
 
 elif component_to_test == "lipb":
-    print("coucou1")
     # define max cell size range
     no_cases = 26
     max_size_range = []
@@ -86,7 +74,6 @@ elif component_to_test == "lipb":
         )
 
 elif component_to_test == "structure":
-    print("coucou2")
     # define max cell size range
     no_cases = 26
     max_size_range = []
