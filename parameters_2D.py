@@ -181,7 +181,7 @@ my_model.boundary_conditions = [
 ]
 
 # define exports
-folder_results = "Results/"
+folder_results = "results/"
 my_derived_quantities = F.DerivedQuantities(
     filename=folder_results + "derived_quantities.csv",
     nb_iterations_between_exports=1,
