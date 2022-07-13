@@ -847,10 +847,28 @@ def generate_mesh_with_salome(
         salome.sg.updateObjBrowser()
 
 
-if __name__ == "__main__":
-    n = 0
+def optimised_case():
+    med_mesh_filename = "WCLL_2D_optimised.med"
+    lipb_optimised_size = 7.70e-04
+    structure_optimised_size = 9.00e-04
+    baffle_plate_optimised_size = 3.23e-04
+    tungsten_optimised_size = 3.23e-04
+    bz_pipes_optimised_size = 3.23e-04
 
-    test_list = [[0.005, 0.005, 0.005, 0.005, 0.005]]
+    print("Meshing optimised case")
+    generate_mesh_with_salome(
+        med_mesh_filename=med_mesh_filename,
+        lipb_size=lipb_optimised_size,
+        structure_size=structure_optimised_size,
+        baffle_plate_size=baffle_plate_optimised_size,
+        tungsten_size=tungsten_optimised_size,
+        bz_pipes_size=bz_pipes_optimised_size,
+    )
+    print("done")
+
+
+def testing():
+    n = 0
     component_to_test = "everything"
     for list in test_list:
         n += 1
@@ -892,3 +910,15 @@ if __name__ == "__main__":
             bz_pipes_size=bz_pipes_size,
         )
         print("done")
+
+
+if __name__ == "__main__":
+
+    # commmand to run file = C:\SALOME-9.8.0\run_salome.bat -t mesh_with_salome.py
+    # must be run in windows powershell
+
+    # optimised 2D mesh
+    optimised_case()
+
+    # testing different meshes defined in parametric values
+    # testing()
