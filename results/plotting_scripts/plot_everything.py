@@ -23,7 +23,7 @@ factor = component_to_test + "_max_size"
 
 for size in max_size_range:
     max_sizes.append(size)
-    data_folder = "../../data/meshes/mesh_study/Results/{}_{:.1e}/".format(factor, size)
+    data_folder = "../h_transport_results/{}_{:.1e}/".format(factor, size)
     data = np.genfromtxt(
         data_folder + "derived_quantities.csv", delimiter=",", names=True
     )
