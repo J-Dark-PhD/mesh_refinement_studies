@@ -52,16 +52,20 @@ def convert_med_to_xdmf(
 
 
 if __name__ == "__main__":
-    # convert_med_to_xdmf("Mesh_2D.med")
-    for size in max_size_range:
-        mesh_folder = "meshes/"
-        results_folder = mesh_folder + "xdmf_files/"
-        med_filename = mesh_folder + "med_files/{}_max_size_{:.2e}.med".format(
-            component_to_test, size
-        )
-        filename_extension = "{}_max_size_{:.2e}".format(component_to_test, size)
-        domains_file, boundary_file = convert_med_to_xdmf(
-            med_filename=med_filename,
-            filename_extension=filename_extension,
-            results_folder=results_folder,
-        )
+    convert_med_to_xdmf(
+        med_filename="WCLL_2D_optimised.med",
+        filename_extension="2D",
+        results_folder="Results/",
+    )
+    # for size in max_size_range:
+    #     mesh_folder = "meshes/"
+    #     results_folder = mesh_folder + "xdmf_files/"
+    #     med_filename = mesh_folder + "med_files/{}_max_size_{:.2e}.med".format(
+    #         component_to_test, size
+    #     )
+    #     filename_extension = "{}_max_size_{:.2e}".format(component_to_test, size)
+    #     domains_file, boundary_file = convert_med_to_xdmf(
+    #         med_filename=med_filename,
+    #         filename_extension=filename_extension,
+    #         results_folder=results_folder,
+    #     )
